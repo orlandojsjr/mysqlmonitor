@@ -5,6 +5,7 @@
  */
 package br.com.mysqlmonitor.mb;
 
+import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -12,7 +13,7 @@ import javax.faces.context.FacesContext;
  *
  * @author orlando
  */
-public class Face {
+public class Face implements Serializable{
     public void addMensagem(String mensagem, FacesMessage.Severity tipo) {        
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(tipo, mensagem, null));        
     }
