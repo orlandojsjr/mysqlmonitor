@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:util="http://xmlns.jcp.org/jsf/composite/componentes">
+    <ui:define name="titulo">Cadastro Usuário</ui:define>
+    <ui:define name="barraNavegacao">Usuário</ui:define>
+    <ui:define name="body">        
+        <div class="well">
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane active in" id="home">
+                    <h:form id="form">
+                        <util:texto id="nome" label="Nome" valor="#{usuarioMB.usuario.nome}" required="true" />
+                        <util:texto id="email" label="Email" valor="#{usuarioMB.usuario.email}" required="true" />
+                        <util:texto id="login" label="Login" valor="#{usuarioMB.usuario.login}" required="true" />
+                        <util:senha id="senha" valor="#{usuarioMB.usuario.senha}" confirmaSenha="#{usuarioMB.confirmaSenha}" exibirConfirmaSenha="true" required="true" />                        
+                        <p:messages id="mensagem"/>
+                        <div class="btn-toolbar">                            
+                            <p:commandButton value="Salvar" update="form" actionListener="#{usuarioMB.salvar()}" styleClass="btn btn-primary"/>
+                        </div>
+                    </h:form>
+                </div>                            
+            </div>
+        </div>        
+    </ui:define>
+</ui:composition>

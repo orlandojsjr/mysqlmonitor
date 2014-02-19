@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui">
+    <cc:interface>
+        <cc:attribute name="id" />
+        <cc:attribute name="label"/>
+        <cc:attribute name="valor"/>
+        <cc:attribute name="styleClass" default="input-xlarge"/>
+        <cc:attribute name="required" default="false"/>
+        <cc:attribute name="requiredMessage" default="Campo #{cc.attrs.label} Obrigatório!"/>
+    </cc:interface>
+    <cc:implementation>
+        <h:outputText  value="#{cc.attrs.label}"/><br/>
+        <h:inputText id="#{cc.attrs.id}" value="#{cc.attrs.valor}" required="#{cc.attrs.required}" requiredMessage="#{cc.attrs.requiredMessage}" styleClass="#{cc.attrs.styleClass}"/><br/>
+    </cc:implementation>
+</html>
