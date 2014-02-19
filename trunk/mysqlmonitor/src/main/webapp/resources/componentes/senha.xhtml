@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <cc:interface>  
+        <cc:attribute name="id"/>
+        <cc:attribute name="valor"/>
+        <cc:attribute name="required"/>
+        <cc:attribute name="confirmaSenha"/>
+        <cc:attribute name="exibirConfirmaSenha" default="false"/>
+        <cc:attribute name="styleClass" default="input-xlarge"/>
+    </cc:interface>
+    <cc:implementation>
+        <h:outputText  value="Senha"/><br/>
+        <c:if test="#{cc.attrs.exibirConfirmaSenha eq 'false'}">
+            <p:password id="#{cc.attrs.id}" value="#{cc.attrs.valor}" required="#{cc.attrs.required}" requiredMessage="Campo Senha Obrigatorio!" validatorMessage="Os campos 'Senha' não são iguais!" styleClass="#{cc.attrs.styleClass}"/><br/>
+        </c:if>
+        <c:if test="#{cc.attrs.exibirConfirmaSenha eq 'true'}">            
+            <p:password id="#{cc.attrs.id}" value="#{cc.attrs.valor}" required="#{cc.attrs.required}" match="confirma#{cc.attrs.id}" requiredMessage="Campo Senha Obrigatorio!" validatorMessage="Os campos 'Senha' não são iguais!" styleClass="#{cc.attrs.styleClass}"/><br/>
+            <h:outputText  value="Confirma Senha"/><br/>
+            <p:password id="confirma#{cc.attrs.id}" value="#{cc.attrs.confirmaSenha}" styleClass="#{cc.attrs.styleClass}"/><br/>
+        </c:if>
+    </cc:implementation>
+</html>

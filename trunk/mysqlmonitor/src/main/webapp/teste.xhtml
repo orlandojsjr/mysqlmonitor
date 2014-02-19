@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:util="http://xmlns.jcp.org/jsf/composite/componentes"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:inputText id="teste" value="#{usuarioMB.usuario.nome}" required="true" requiredMessage="teste"/>
+        
+        <p:keyboard
+                    password="true" keypadOnly="true"/> 
+        
+          
+        <h:messages/>
+        <h:commandButton action="#{usuarioMB.salvar()}"/>
+        </h:form>
+    </h:body>
+</html>
+

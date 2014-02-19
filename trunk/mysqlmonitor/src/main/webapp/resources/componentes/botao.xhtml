@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui">
+    <cc:interface>
+        <cc:attribute name="valor"/>
+        <cc:attribute name="action" method-signature="java.lang.String action()"/>
+        <cc:attribute name="styleClass" default="btn btn-primary"/>
+        <cc:attribute name="update"/>
+    </cc:interface>
+    <cc:implementation>
+        <p:commandButton value="#{cc.attrs.valor}" update="#{cc.attrs.update}" actionListener="#{cc.attrs.action}" styleClass="#{cc.attrs.styleClass}"/>
+    </cc:implementation>
+</html>
+
