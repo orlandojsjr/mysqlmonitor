@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:util="http://java.sun.com/jsf/composite/componentes">
+    <ui:define name="titulo">Cadastro Grupo Servidor</ui:define>
+    <ui:define name="barraNavegacao">Grupo Servidor</ui:define>
+    <ui:define name="body">        
+        <div class="well">
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane active in" id="home">
+                    <h:form id="form">
+                        <util:texto id="nomeGrupo" label="Nome do Grupo" valor="#{grupoServidorMB.grupoServidor.nome}" required="true" />
+                        <util:texto id="bancoDados" label="Banco de Dados" valor="#{grupoServidorMB.grupoServidor.bancoDados}" required="true" />                        
+                        <p:messages id="mensagem"/>
+                        <div class="btn-toolbar">                            
+                            <p:commandButton value="Salvar" update="form" actionListener="#{grupoServidorMB.salvar()}" styleClass="btn btn-primary"/>
+                        </div>
+                    </h:form>
+                </div>
+            </div>                            
+        </div>                    
+    </ui:define>
