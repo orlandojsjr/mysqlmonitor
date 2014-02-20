@@ -8,23 +8,22 @@
                 xmlns:util="http://java.sun.com/jsf/composite/componentes">
     <ui:define name="titulo">Cadastro Servidor</ui:define>
     <ui:define name="barraNavegacao">Servidor</ui:define>
-    <ui:define name="body">
-        <h:form>  
-            <div class="well">
-                <div id="myTabContent" class="tab-content">
-                    <div class="tab-pane active in" id="home">
-                        <form>
-                            <util:texto label="Ip" styleClass="input-xlarge"/>
-                            <util:texto label="Porta" styleClass="input-xlarge"/>
-                            <util:texto label="Usuário" styleClass="input-xlarge"/>
-                            <util:senha styleClass="input-xlarge"/>
-                            <div class="btn-toolbar">
-                                <util:botao label="Salvar" styleClass="btn btn-primary"/>
-                            </div>
-                        </form>
-                    </div>                            
+    <ui:define name="body">        
+        <div class="well">
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane active in" id="home">
+                    <h:form id="form">
+                        <util:texto id="nome" label="Ip" valor="#{servidorMB.servidor.ip}" required="true" />
+                        <util:texto id="email" label="Porta" valor="#{servidorMB.servidor.porta}" required="true" />
+                        <util:texto id="login" label="Usuario" valor="#{servidorMB.servidor.usuario}" required="true" />
+                        <util:senha id="senha" valor="#{servidorMB.servidor.senha}" confirmaSenha="#{usuarioMB.confirmaSenha}" exibirConfirmaSenha="true" required="true" />                        
+                        <p:messages id="mensagem"/>
+                        <div class="btn-toolbar">                            
+                            <p:commandButton value="Salvar" update="form" actionListener="#{servidorMB.salvar()}" styleClass="btn btn-primary"/>
+                        </div>
+                    </h:form>
                 </div>
-            </div>
-        </h:form>
+            </div>                            
+        </div>                    
     </ui:define>
 </ui:composition>
