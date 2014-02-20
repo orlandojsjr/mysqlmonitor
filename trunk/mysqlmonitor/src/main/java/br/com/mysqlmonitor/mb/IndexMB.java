@@ -6,7 +6,7 @@
 
 package br.com.mysqlmonitor.mb;
 
-import br.com.mysqlmonitor.entidade.Usuario;
+import com.mysqlmonitor.entidade.Usuario;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
