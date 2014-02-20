@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.mysqlmonitor.entidade;
 
 import java.io.Serializable;
@@ -37,6 +36,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "GrupoServidor.findByBancoDados", query = "SELECT g FROM GrupoServidor g WHERE g.bancoDados = :bancoDados"),
     @NamedQuery(name = "GrupoServidor.findByDataCadastro", query = "SELECT g FROM GrupoServidor g WHERE g.dataCadastro = :dataCadastro")})
 public class GrupoServidor implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,6 +58,7 @@ public class GrupoServidor implements Serializable {
     private List<ComandoSql> comandoSqlList;
 
     public GrupoServidor() {
+        dataCadastro = new Date();
     }
 
     public GrupoServidor(Integer idGrupoServidor) {
@@ -136,5 +137,5 @@ public class GrupoServidor implements Serializable {
     public String toString() {
         return "com.mysqlmonitor.entidade.GrupoServidor[ idGrupoServidor=" + idGrupoServidor + " ]";
     }
-    
+
 }
