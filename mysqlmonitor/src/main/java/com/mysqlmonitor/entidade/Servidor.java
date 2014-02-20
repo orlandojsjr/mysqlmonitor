@@ -161,7 +161,7 @@ public class Servidor implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mysqlmonitor.entidade.Servidor[ idServidor=" + idServidor + " ]";
+        return "Servidor{" + "idServidor=" + idServidor + ", ip=" + ip + ", porta=" + porta + ", usuario=" + usuario + ", senha=" + senha + ", tipo=" + tipo + ", dataCadastro=" + dataCadastro + ", grupoServidor=" + grupoServidor + '}';
     }
     
 }
