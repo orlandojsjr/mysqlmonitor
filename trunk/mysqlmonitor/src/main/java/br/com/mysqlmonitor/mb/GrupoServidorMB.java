@@ -8,6 +8,8 @@ package br.com.mysqlmonitor.mb;
 
 import com.mysqlmonitor.dao.GrupoServidorDAO;
 import com.mysqlmonitor.entidade.GrupoServidor;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.inject.Model;
 import javax.faces.application.FacesMessage;
 import javax.inject.Inject;
@@ -32,8 +34,13 @@ public class GrupoServidorMB extends Face{
     }
     
     public void salvar(){
-        grupoServidorDAO.salvar(grupoServidor);
-        addMensagem("Cadastro realizado com sucesso!", FacesMessage.SEVERITY_INFO);
+        try {
+            grupoServidorDAO.salvar(grupoServidor);
+            addMensagem("Cadastro realizado com sucesso!", FacesMessage.SEVERITY_INFO);
+        } catch (Exception ex) {
+            addMensagem("Erro ao cadastrar!", FacesMessage.SEVERITY_ERROR);
+            Logger.getLogger(GrupoServidorMB.class.getName()).log(Level.SEVERE, null, ex);
+        }        
     }
     
 }
