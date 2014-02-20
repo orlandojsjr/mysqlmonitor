@@ -5,7 +5,8 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:util="http://java.sun.com/jsf/composite/componentes">
+                xmlns:util="http://java.sun.com/jsf/composite/componentes"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="titulo">Cadastro Servidor</ui:define>
     <ui:define name="barraNavegacao">Servidor</ui:define>
     <ui:define name="body">        
@@ -13,10 +14,17 @@
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane active in" id="home">
                     <h:form id="form">
+                        <util:comboBox id="grupoServidor" label="Banco de Dados" listaItens="#{servidorMB.grupoServidores}" valor="#{servidorMB.servidor.grupoServidor.idGrupoServidor}" executarAcao="true" action="#{servidorMB.verificarServidorMaster()}" render="tipo"/>
                         <util:texto id="nome" label="Ip" valor="#{servidorMB.servidor.ip}" required="true" />
                         <util:texto id="email" label="Porta" valor="#{servidorMB.servidor.porta}" required="true" />
                         <util:texto id="login" label="Usuario" valor="#{servidorMB.servidor.usuario}" required="true" />
                         <util:senha id="senha" valor="#{servidorMB.servidor.senha}" confirmaSenha="#{usuarioMB.confirmaSenha}" exibirConfirmaSenha="true" required="true" />                        
+                         <h:outputText value="Tipo" /> <br/> 
+                         <p:selectOneRadio id="tipo" value="#{servidorMB.servidor.tipo}" required="true" requiredMessage="Campo Tipo Obrigatório!">  
+                             <f:ajax render="@form" event="change" listener="#{servidorMB.verificarServidorMaster()}" />
+                            <f:selectItem itemLabel="Master" itemValue="MASTER" />  
+                            <f:selectItem itemLabel="Slave" itemValue="SLAVE" />                              
+                        </p:selectOneRadio><br/>
                         <p:messages id="mensagem"/>
                         <div class="btn-toolbar">                            
                             <p:commandButton value="Salvar" update="form" actionListener="#{servidorMB.salvar()}" styleClass="btn btn-primary"/>
