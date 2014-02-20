@@ -7,6 +7,7 @@
 package com.mysqlmonitor.dao;
 
 import com.mysqlmonitor.entidade.GrupoServidor;
+import java.util.List;
 
 /**
  *
@@ -14,7 +15,15 @@ import com.mysqlmonitor.entidade.GrupoServidor;
  */
 public class GrupoServidorDAO extends GenericDAO{
     
-    public void salvar(GrupoServidor grupoServidor){
+    public void salvar(GrupoServidor grupoServidor) throws Exception{
         super.salvar(grupoServidor);
     }    
+    
+    public GrupoServidor consultar(int id) throws Exception{
+        return super.consultar(GrupoServidor.class, id);
+    }
+    
+    public List<GrupoServidor> getListaGrupoServidor() throws Exception{
+        return super.listarPorParametrosHQL(GrupoServidor.class, "Select gs from GrupoServidor gs order by gs.bancoDados", 0, 0);
+    }
 }
