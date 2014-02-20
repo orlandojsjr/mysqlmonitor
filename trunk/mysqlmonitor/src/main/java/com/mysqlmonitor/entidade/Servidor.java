@@ -8,6 +8,7 @@ package com.mysqlmonitor.entidade;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.inject.Inject;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -63,12 +64,13 @@ public class Servidor implements Serializable {
     @Column(name = "DATA_CADASTRO")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCadastro;
+    @Inject
     @JoinColumn(name = "ID_GRUPO_SERVIDOR", referencedColumnName = "ID_GRUPO_SERVIDOR")
     @ManyToOne(optional = false)
     private GrupoServidor grupoServidor;
 
     public Servidor() {
-        dataCadastro = new Date();
+        dataCadastro = new Date();        
     }
 
     public Servidor(Integer idServidor) {
