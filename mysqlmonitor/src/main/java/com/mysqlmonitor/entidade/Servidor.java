@@ -70,7 +70,8 @@ public class Servidor implements Serializable {
     private GrupoServidor grupoServidor;
 
     public Servidor() {
-        dataCadastro = new Date();        
+        dataCadastro = new Date();
+        tipo = "SLAVE";
     }
 
     public Servidor(Integer idServidor) {
