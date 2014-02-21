@@ -31,8 +31,12 @@ public class ServidorMB extends Face {
     private Servidor servidor;
     @Inject
     private GrupoServidorDAO grupoServidorDAO;
-    private List<SelectItem> grupoServidoresItem;   
+    private List<Servidor> servidores;
+    private List<Servidor> servidoresFiltro;
+    private List<SelectItem> grupoServidoresItem;
+    private List<SelectItem> grupoServidoresItemFiltro;
     private boolean existeServidorMaster;
+    private String tab;
 
     public Servidor getServidor() {
         return servidor;
@@ -45,12 +49,54 @@ public class ServidorMB extends Face {
     public boolean isExisteServidorMaster() {
         return existeServidorMaster;
     }
-    
+
+    public List<Servidor> getServidoresFiltro() {
+        return servidoresFiltro;
+    }
+
+    public void setServidoresFiltro(List<Servidor> servidoresFiltro) {
+        this.servidoresFiltro = servidoresFiltro;
+    }
+
+    public String getTab() {
+        return tab;
+    }
+
+    public void setTab(String tab) {
+        this.tab = tab;
+    }
+
+    public List<Servidor> getServidores() {
+        try {
+            if (servidores == null) {
+                servidores = servidorDAO.findAll();
+            }
+        } catch (Exception ex) {
+            addMensagem("Erro ao carregar Servidores!", FacesMessage.SEVERITY_ERROR);
+        }
+        return servidores;
+    }
+
+    public List<SelectItem> getGrupoServidoresItemFiltro() {
+        try {
+            if (grupoServidoresItemFiltro == null) {
+                grupoServidoresItemFiltro = new ArrayList<SelectItem>();
+                grupoServidoresItemFiltro.add(new SelectItem("", " -- Todos -- "));
+                for (GrupoServidor grupoServidor : grupoServidorDAO.findAll()) {
+                    grupoServidoresItemFiltro.add(new SelectItem(grupoServidor.getBancoDados()));
+                }
+            }
+        } catch (Exception ex) {
+            addMensagem("Erro ao carregar Grupo Servidores!", FacesMessage.SEVERITY_ERROR);
+        }
+        return grupoServidoresItemFiltro;
+    }
+
     public List<SelectItem> getGrupoServidores() {
         try {
             if (grupoServidoresItem == null) {
                 grupoServidoresItem = new ArrayList<SelectItem>();
-                for (GrupoServidor grupoServidor : grupoServidorDAO.getListaGrupoServidor()) {
+                for (GrupoServidor grupoServidor : grupoServidorDAO.findAll()) {
                     grupoServidoresItem.add(new SelectItem(grupoServidor.getIdGrupoServidor(), grupoServidor.getBancoDados()));
                 }
             }
@@ -60,26 +106,59 @@ public class ServidorMB extends Face {
         return grupoServidoresItem;
     }
 
-    public void salvar() {         
+    public void salvar() {
         try {
+            if (!verificarServidorMaster()) {
+                servidor.setTipo("MASTER");
+            }
             servidorDAO.salvar(servidor);
             addMensagem("Cadrastro realizado com sucesso!", FacesMessage.SEVERITY_INFO);
+            servidor = new Servidor();
+            tab = "1";
         } catch (Exception ex) {
             Logger.getLogger(ServidorMB.class.getName()).log(Level.SEVERE, null, ex);
             addMensagem("Erro ao cadastrar!", FacesMessage.SEVERITY_ERROR);
-        }        
+        }
+    }
+
+    public void alterar() {
+        try {
+            if (!verificarServidorMaster()) {
+                servidor.setTipo("MASTER");
+            }
+            servidorDAO.alterar(servidor);
+            addMensagem("Cadrastro alterado com sucesso!", FacesMessage.SEVERITY_INFO);
+            servidor = new Servidor();
+            tab = "0";
+        } catch (Exception ex) {
+            Logger.getLogger(ServidorMB.class.getName()).log(Level.SEVERE, null, ex);
+            addMensagem("Erro ao cadastrar!", FacesMessage.SEVERITY_ERROR);
+        }
     }
     
-    public void verificarServidorMaster(){
+    public void excluir() {
+        try {            
+            servidorDAO.excluir(servidor);
+            System.out.println("afdfds");
+            servidor = new Servidor();            
+        } catch (Exception ex) {
+            Logger.getLogger(ServidorMB.class.getName()).log(Level.SEVERE, null, ex);
+            addMensagem("Erro ao excluir!", FacesMessage.SEVERITY_ERROR);
+        }
+    }
+
+    public boolean verificarServidorMaster() {
         try {
             existeServidorMaster = servidorDAO.existeServidorMasterNo(servidor.getGrupoServidor());
-            if(existeServidorMaster){
-                servidor.setTipo("SLAVE");
-            }
         } catch (Exception ex) {
             addMensagem("Erro!", FacesMessage.SEVERITY_ERROR);
             Logger.getLogger(ServidorMB.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return existeServidorMaster;
+    }
+
+    public void tabCadastro() {
+        tab = "1";
     }
 
 }
