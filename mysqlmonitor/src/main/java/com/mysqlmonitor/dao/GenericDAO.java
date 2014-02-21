@@ -34,7 +34,7 @@ public class GenericDAO {
     }
 
     protected void excluir(Serializable serializable) throws Exception {
-        em.remove(serializable);
+        em.remove(em.merge(serializable));
     }
     
     protected <T extends Serializable> List<T> listarPorParametrosHQL(Class<T> clazz, String hql, int inicio, int limite, Parametro... parametros) throws Exception {
