@@ -5,6 +5,7 @@
  */
 package com.mysqlmonitor.dao;
 
+import br.com.mysqlmonitor.Interceptor.TransacaoJPA;
 import com.mysqlmonitor.entidade.GrupoServidor;
 import com.mysqlmonitor.entidade.Servidor;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  *
  * @author orlando
  */
+@TransacaoJPA
 public class ServidorDAO extends GenericDAO {
 
     public void salvar(Servidor servidor) throws Exception {
