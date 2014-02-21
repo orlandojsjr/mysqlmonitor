@@ -21,6 +21,8 @@ public interface GenericDAOInterface {
     
     public void alterar(Serializable serializable) throws Exception;
     
+    public void excluir(Serializable serializable) throws Exception;
+    
     public <T extends Serializable> List<T> listarPorParametrosHQL(Class<T> clazz, String hql, int inicio, int limite, Parametro... parametros) throws Exception;
     
 }
