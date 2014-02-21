@@ -13,7 +13,7 @@ import com.mysqlmonitor.entidade.LogAgente;
  */
 public class LogAgenteDAO extends GenericDAO {
 
-    public void salvar(LogAgente logAgente) {
+    public void salvar(LogAgente logAgente) throws Exception {
         super.salvar(logAgente);
     }
 }
