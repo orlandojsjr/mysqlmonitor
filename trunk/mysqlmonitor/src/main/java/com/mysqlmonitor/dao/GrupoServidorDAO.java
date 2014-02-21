@@ -23,7 +23,7 @@ public class GrupoServidorDAO extends GenericDAO{
         return super.consultar(GrupoServidor.class, id);
     }
     
-    public List<GrupoServidor> getListaGrupoServidor() throws Exception{
+    public List<GrupoServidor> findAll() throws Exception{
         return super.listarPorParametrosHQL(GrupoServidor.class, "Select gs from GrupoServidor gs order by gs.bancoDados", 0, 0);
     }
 }
