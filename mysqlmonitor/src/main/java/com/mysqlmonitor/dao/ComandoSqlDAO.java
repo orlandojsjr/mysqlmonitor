@@ -14,7 +14,7 @@ import com.mysqlmonitor.entidade.ComandoSql;
  */
 public class ComandoSqlDAO extends GenericDAO{
     
-    public void salvar(ComandoSql comandoSql){
+    public void salvar(ComandoSql comandoSql) throws Exception{
         super.salvar(comandoSql);
     }
 }
