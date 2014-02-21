@@ -14,15 +14,14 @@ import javax.persistence.EntityManager;
  *
  * @author orlando
  */
+
 public class GenericDAO {
 
     @Inject
     private EntityManager em;
 
-    protected void salvar(Serializable object) throws Exception {
-        em.getTransaction().begin();
-        em.persist(object);
-        em.getTransaction().commit();
+    protected void salvar(Serializable object) throws Exception {        
+        em.persist(object);        
     }
 
     protected <T extends Serializable> T consultar(Class<T> clazz, Serializable id) throws Exception {
