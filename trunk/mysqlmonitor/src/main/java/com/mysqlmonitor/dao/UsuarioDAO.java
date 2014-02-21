@@ -14,7 +14,7 @@ import com.mysqlmonitor.entidade.Usuario;
  */
 public class UsuarioDAO extends GenericDAO {
     
-    public void salvar(Usuario usuario) {
+    public void salvar(Usuario usuario) throws Exception {
         super.salvar(usuario);
     }    
 }
