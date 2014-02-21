@@ -11,14 +11,15 @@
         <cc:attribute name="listaItens"/>
         <cc:attribute name="required"/>
         <cc:attribute name="requiredMessage" default="Campo #{cc.attrs.label} Obrigatório!"/>
+        <cc:attribute name="validatorMessage" default="Campo #{cc.attrs.label} inválido!"/>
         <cc:attribute name="executarAcao"/>
         <cc:attribute name="render"/>
         <cc:attribute name="action" method-signature="java.lang.String action()"/>
     </cc:interface>
     <cc:implementation>
         <h:outputText  value="#{cc.attrs.label}"/><br/>
-        <h:selectOneMenu value="#{cc.attrs.valor}" required="true" >
-            <f:selectItem itemValue="0" itemLabel="-- Selecione --" />
+        <h:selectOneMenu value="#{cc.attrs.valor}" required="true" validatorMessage="#{cc.attrs.validatorMessage}" converterMessage="#{cc.attrs.validatorMessage}" requiredMessage="#{cc.attrs.requiredMessage}">
+            <f:selectItem itemValue="" itemLabel="-- Selecione --" />
             <f:selectItems value="#{cc.attrs.listaItens}" var="item" itemLabel="#{item.label}" itemValue="#{item.value}"  />  
             <f:ajax disabled="#{!cc.attrs.executarAcao}" render="@form" event="change" listener="#{cc.attrs.action}" />
         </h:selectOneMenu><br/>
