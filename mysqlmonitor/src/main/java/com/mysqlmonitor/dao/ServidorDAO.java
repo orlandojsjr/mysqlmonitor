@@ -24,6 +24,10 @@ public class ServidorDAO extends GenericDAO {
     public void alterar(Servidor servidor) throws Exception {
         super.alterar(servidor);
     }
+    
+    public void excluir(Servidor servidor) throws Exception {
+        super.excluir(servidor);
+    }
 
     public List<Servidor> findAll() throws Exception {
         return super.listarPorParametrosHQL(Servidor.class, "Select s from Servidor s order by s.grupoServidor.bancoDados", 0, 0);
