@@ -33,6 +33,10 @@ public class GenericDAO {
         em.merge(serializable);
     }
 
+    protected void excluir(Serializable serializable) throws Exception {
+        em.remove(serializable);
+    }
+    
     protected <T extends Serializable> List<T> listarPorParametrosHQL(Class<T> clazz, String hql, int inicio, int limite, Parametro... parametros) throws Exception {
         javax.persistence.Query query = em.createQuery(hql);
         if (parametros != null) {
