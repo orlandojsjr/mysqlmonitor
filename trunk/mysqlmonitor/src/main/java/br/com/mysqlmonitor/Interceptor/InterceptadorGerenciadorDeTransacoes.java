@@ -26,8 +26,7 @@ public class InterceptadorGerenciadorDeTransacoes {
     public Object gerenciaTransacao(InvocationContext context) throws Exception {
 
         EntityTransaction tx = null;
-        try {
-            System.out.println("opa");
+        try {            
             tx = entityManager.getTransaction(); 
             tx.begin();
             Object retorno = context.proceed();
