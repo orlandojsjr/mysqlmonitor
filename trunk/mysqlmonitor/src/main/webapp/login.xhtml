@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Mysql Monitor - Login</title>
         <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css"/>
@@ -57,10 +58,13 @@
                     <div class="block-body">
                         <h:form>                            
                             <h:outputLabel value="Usuário"/>
-                            <h:inputText class="span12"/>                            
+                            <h:inputText class="span12" value="#{usuarioLogadoMB.login}"/>                            
                             <h:outputLabel value="Senha"/>
-                            <h:inputText class="span12"/>
-                            <a href="index.html" class="btn btn-primary pull-right">Login</a>                    
+                            <h:inputText class="span12" value="#{usuarioLogadoMB.senha}"/>
+                            <p:messages id="mensagem"/>
+                            <div class="btn-toolbar">                            
+                                <p:commandButton value="Salvar" update="form" actionListener="#{usuarioLogadoMB.logar()}" styleClass="btn btn-primary"/>
+                            </div>
                             <div class="clearfix"></div>
                         </h:form>
                     </div>
