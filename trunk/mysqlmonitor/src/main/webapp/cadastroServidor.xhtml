@@ -42,9 +42,7 @@
                             </p:commandButton>  
                         </p:column>  
                         <p:column style="width:4%">  
-                            <p:commandButton id="deletar" update=":tabView" actionListener="#{servidorMB.excluir()}"  icon="ui-icon-remove" title="Alterar">  
-                                <f:setPropertyActionListener value="#{servidor}" target="#{servidorMB.servidor}" />  
-                            </p:commandButton>  
+                            <p:commandButton id="deletar" update="dataTable" actionListener="#{servidorMB.excluir(servidor)}" icon="ui-icon-trash" title="Alterar"/>                                  
                         </p:column>  
                     </p:dataTable>  
                 </h:form>
