@@ -136,11 +136,10 @@ public class ServidorMB extends Face {
         }
     }
     
-    public void excluir() {
-        try {            
-            servidorDAO.excluir(servidor);
-            System.out.println("afdfds");
-            servidor = new Servidor();            
+    public void excluir(Servidor s) {
+        try {                
+            servidorDAO.excluir(s);
+            servidores = servidorDAO.findAll();            
         } catch (Exception ex) {
             Logger.getLogger(ServidorMB.class.getName()).log(Level.SEVERE, null, ex);
             addMensagem("Erro ao excluir!", FacesMessage.SEVERITY_ERROR);
@@ -160,5 +159,4 @@ public class ServidorMB extends Face {
     public void tabCadastro() {
         tab = "1";
     }
-
 }
