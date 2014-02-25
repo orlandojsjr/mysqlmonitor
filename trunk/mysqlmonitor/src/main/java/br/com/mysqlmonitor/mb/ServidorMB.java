@@ -5,6 +5,7 @@
  */
 package br.com.mysqlmonitor.mb;
 
+import br.com.mysqlmonitor.Interceptor.Login;
 import com.mysqlmonitor.dao.GrupoServidorDAO;
 import com.mysqlmonitor.dao.ServidorDAO;
 import com.mysqlmonitor.entidade.GrupoServidor;
@@ -22,6 +23,7 @@ import javax.inject.Inject;
  *
  * @author Orlando
  */
+@Login
 @Model
 public class ServidorMB extends Face {
 
