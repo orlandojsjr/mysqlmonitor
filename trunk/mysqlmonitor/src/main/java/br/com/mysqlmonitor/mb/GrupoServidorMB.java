@@ -6,6 +6,7 @@
 
 package br.com.mysqlmonitor.mb;
 
+import br.com.mysqlmonitor.Interceptor.Login;
 import com.mysqlmonitor.dao.GrupoServidorDAO;
 import com.mysqlmonitor.entidade.GrupoServidor;
 import java.util.logging.Level;
@@ -18,7 +19,8 @@ import javax.inject.Inject;
  *
  * @author Orlando
  */
-@Model
+@Login
+@Model 
 public class GrupoServidorMB extends Face{
     @Inject
     private GrupoServidorDAO grupoServidorDAO;
