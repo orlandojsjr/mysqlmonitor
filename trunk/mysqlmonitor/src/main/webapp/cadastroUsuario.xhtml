@@ -5,25 +5,53 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:util="http://xmlns.jcp.org/jsf/composite/componentes">
+                xmlns:util="http://xmlns.jcp.org/jsf/composite/componentes"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="titulo">Cadastro Usuário</ui:define>
     <ui:define name="barraNavegacao">Usuário</ui:define>
     <ui:define name="body">        
-        <div class="well">
-            <div id="myTabContent" class="tab-content">
-                <div class="tab-pane active in" id="home">
-                    <h:form id="form">
-                        <util:texto id="nome" label="Nome" valor="#{usuarioMB.usuario.nome}" required="true" />
-                        <util:texto id="email" label="Email" valor="#{usuarioMB.usuario.email}" required="true" />
-                        <util:texto id="login" label="Login" valor="#{usuarioMB.usuario.login}" required="true" />
-                        <util:senha id="senha" valor="#{usuarioMB.usuario.senha}" confirmaSenha="#{usuarioMB.confirmaSenha}" exibirConfirmaSenha="true" required="true" />                        
-                        <p:messages id="mensagem"/>
-                        <div class="btn-toolbar">                            
-                            <p:commandButton value="Salvar" update="form" actionListener="#{usuarioMB.salvar()}" styleClass="btn btn-primary"/>
-                        </div>
-                    </h:form>
-                </div>                            
-            </div>
-        </div>        
+        <p:tabView id="tabView" activeIndex="#{usuarioMB.tab}">  
+            <p:tab id="tab1" title="Usuários">
+                <h:form>
+                    <p:dataTable id="dataTable" styleClass="datatable" var="usuario"  value="#{usuarioMB.usuarios}" widgetVar="usuarioWidget" emptyMessage="Nenhum usuário encontrado">                    
+                        <p:column id="cod" headerText="Cód" width="1%">  
+                            <h:outputText value="#{usuario.idUsuario}" />  
+                        </p:column>                              
+                        <p:column id="email" headerText="email">  
+                            <h:outputText value="#{usuario.email}" />  
+                        </p:column>  
+                        <p:column id="login" headerText="Login" >  
+                            <h:outputText value="#{usuario.login}" />  
+                        </p:column>
+                        <p:column id="tipo" headerText="Tipo">  
+                            <h:outputText value="#{usuario.tipo}" />  
+                        </p:column>                        
+                        <p:column style="width:4%">  
+                            <p:commandButton id="selectButton" update=":tabView" actionListener="#{usuarioMB.tabCadastro(usuario.idUsuario)}"  icon="ui-icon-search" title="Alterar">                                  
+                            </p:commandButton>  
+                        </p:column>  
+                        <p:column style="width:4%">  
+                            <p:commandButton id="deletar" update="dataTable" actionListener="#{usuarioMB.excluir(usuario)}" icon="ui-icon-trash" title="Excluir"/>                                  
+                        </p:column>  
+                    </p:dataTable>  
+                </h:form>
+            </p:tab>
+            <p:tab id="tab2" title="Cadastro">
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane active in" id="home">
+                        <h:form id="form">
+                            <h:inputHidden value="#{usuarioMB.usuario.idUsuario}" />
+                            <util:texto id="nome" label="Nome" valor="#{usuarioMB.usuario.nome}" required="true" />
+                            <util:texto id="email" label="Email" valor="#{usuarioMB.usuario.email}" required="true" />
+                            <util:texto id="login" label="Login" valor="#{usuarioMB.usuario.login}" required="true" />
+                            <util:comboBox id="tipo" label="Tipo" listaItens="#{usuarioMB.tipos}" valor="#{usuarioMB.usuario.tipo}" />
+                            <util:senha id="senha" valor="#{usuarioMB.usuario.senha}" confirmaSenha="#{usuarioMB.confirmaSenha}" exibirConfirmaSenha="true" required="true" />                        
+                            <p:messages id="mensagem"/>                                                        
+                            <p:commandButton value="Salvar" update="form" actionListener="#{usuarioMB.salvar()}" />                            
+                        </h:form>
+                    </div>                            
+                </div>
+            </p:tab>
+        </p:tabView>        
     </ui:define>
 </ui:composition>
