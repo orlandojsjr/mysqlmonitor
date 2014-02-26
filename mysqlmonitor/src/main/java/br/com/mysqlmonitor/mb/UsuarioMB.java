@@ -5,6 +5,7 @@
  */
 package br.com.mysqlmonitor.mb;
 
+import br.com.mysqlmonitor.Interceptor.Login;
 import com.mysqlmonitor.dao.UsuarioDAO;
 import com.mysqlmonitor.entidade.Usuario;
 import java.io.Serializable;
@@ -20,6 +21,7 @@ import javax.inject.Named;
  * @author orlando
  */
 @Named
+@Login
 @RequestScoped
 public class UsuarioMB extends Face implements Serializable {
 
