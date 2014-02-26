@@ -56,14 +56,14 @@
                 <div class="block">
                     <p class="block-heading">Login</p>
                     <div class="block-body">
-                        <h:form>                            
+                        <h:form id="form">                            
                             <h:outputLabel value="Usuário"/>
                             <h:inputText class="span12" value="#{usuarioLogadoMB.login}"/>                            
                             <h:outputLabel value="Senha"/>
-                            <h:inputText class="span12" value="#{usuarioLogadoMB.senha}"/>
+                            <h:inputSecret class="span12" value="#{usuarioLogadoMB.senha}"/>
                             <p:messages id="mensagem"/>
                             <div class="btn-toolbar">                            
-                                <p:commandButton value="Salvar" update="form" actionListener="#{usuarioLogadoMB.logar()}" styleClass="btn btn-primary"/>
+                                <p:commandButton value="Login" update="form" ajax="false" action="#{usuarioLogadoMB.logar()}" styleClass="btn btn-primary"/>
                             </div>
                             <div class="clearfix"></div>
                         </h:form>
