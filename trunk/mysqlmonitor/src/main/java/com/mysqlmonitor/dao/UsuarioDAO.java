@@ -5,6 +5,7 @@
  */
 package com.mysqlmonitor.dao;
 
+import br.com.mysqlmonitor.Interceptor.TransacaoJPA;
 import com.mysqlmonitor.entidade.Usuario;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -14,6 +15,7 @@ import javax.enterprise.context.RequestScoped;
  * @author orlando
  */
 @RequestScoped
+@TransacaoJPA
 public class UsuarioDAO extends GenericDAO {
 
     public void salvar(Usuario usuario) throws Exception {
@@ -22,6 +24,10 @@ public class UsuarioDAO extends GenericDAO {
 
     public void alterar(Usuario usuario) throws Exception {
         super.alterar(usuario);
+    }
+
+    public Usuario consultar(int id) throws Exception {
+        return super.consultar(Usuario.class, id);
     }
 
     public List<Usuario> findAll() throws Exception {
