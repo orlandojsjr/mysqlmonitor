@@ -7,9 +7,11 @@ package br.com.mysqlmonitor.mb;
 
 import com.mysqlmonitor.dao.UsuarioDAO;
 import com.mysqlmonitor.entidade.Usuario;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -19,7 +21,7 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class UsuarioLogadoMB extends Face {
+public class UsuarioLogadoMB extends Face implements Serializable{
 
     @Inject
     private UsuarioDAO usuarioDAO;
@@ -51,15 +53,21 @@ public class UsuarioLogadoMB extends Face {
         return usuario != null;
     }
 
-    public void logar() {
+    public String logar() {
         try {
             usuario = usuarioDAO.logar(login, senha);
+            if(isLogado()){                
+                return "index";
+            }
         } catch (Exception ex) {
             Logger.getLogger(UsuarioLogadoMB.class.getName()).log(Level.SEVERE, null, ex);
         }
+        addMensagem("Login ou senha inálidos!", FacesMessage.SEVERITY_WARN);
+        return "login";
     }
     
-    public void logOut(){
+    public String logOut(){
         usuario = null;
+        return "login";
     }
 }
