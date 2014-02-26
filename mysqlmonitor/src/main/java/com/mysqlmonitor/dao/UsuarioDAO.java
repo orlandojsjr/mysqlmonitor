@@ -7,11 +7,13 @@ package com.mysqlmonitor.dao;
 
 import com.mysqlmonitor.entidade.Usuario;
 import java.util.List;
+import javax.enterprise.context.RequestScoped;
 
 /**
  *
  * @author orlando
  */
+@RequestScoped
 public class UsuarioDAO extends GenericDAO {
 
     public void salvar(Usuario usuario) throws Exception {
@@ -19,9 +21,9 @@ public class UsuarioDAO extends GenericDAO {
     }
 
     public Usuario logar(String login, String senha) throws Exception {
-        List<Usuario> list = super.listarPorParametrosHQL(Usuario.class, "Select u from Usuario u Where u.login = :login and senha = :senha", 0, 0, new Parametro("login", login), new Parametro("senha", senha));
+        List<Usuario> list = super.listarPorParametrosHQL(Usuario.class, "Select u from Usuario u Where u.login = :login and senha = :senha", 0, 0, new Parametro("login", login), new Parametro("senha", senha));        
         if (!list.isEmpty()) {
-            list.get(0);
+            return list.get(0);
         }
         return null;
     }
