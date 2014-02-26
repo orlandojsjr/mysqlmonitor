@@ -51,7 +51,7 @@ public class Usuario implements Serializable {
     @Size(max = 45)
     @Column(name = "TIPO")
     private String tipo;
-    @Column(name = "DATA_CADASTRO")
+    @Column(name = "DATA_CADASTRO", updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCadastro;
     @Column(name = "ULTIMO_ACESSO")
