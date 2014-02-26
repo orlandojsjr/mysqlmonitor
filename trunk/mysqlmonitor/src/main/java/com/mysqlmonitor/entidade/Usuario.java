@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.mysqlmonitor.entidade;
 
 import java.io.Serializable;
@@ -29,6 +28,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "usuario")
 public class Usuario implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,6 +61,7 @@ public class Usuario implements Serializable {
     private List<ComandoSql> comandoSqlList;
 
     public Usuario() {
+        dataCadastro = new Date();
     }
 
     public Usuario(Integer idUsuario) {
@@ -161,7 +162,6 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mysqlmonitor.entidade.Usuario[ idUsuario=" + idUsuario + " ]";
+        return "Usuario{" + "idUsuario=" + idUsuario + ", nome=" + nome + ", email=" + email + ", login=" + login + ", senha=" + senha + ", tipo=" + tipo + ", dataCadastro=" + dataCadastro + ", ultimoAcesso=" + ultimoAcesso + ", comandoSqlList=" + comandoSqlList + '}';
     }
-    
 }
