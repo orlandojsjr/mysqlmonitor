@@ -20,8 +20,16 @@ public class UsuarioDAO extends GenericDAO {
         super.salvar(usuario);
     }
 
+    public void alterar(Usuario usuario) throws Exception {
+        super.alterar(usuario);
+    }
+
+    public List<Usuario> findAll() throws Exception {
+        return super.listarPorParametrosHQL(Usuario.class, "Select u from Usuario u order by u.nome", 0, 0);
+    }
+
     public Usuario logar(String login, String senha) throws Exception {
-        List<Usuario> list = super.listarPorParametrosHQL(Usuario.class, "Select u from Usuario u Where u.login = :login and senha = :senha", 0, 0, new Parametro("login", login), new Parametro("senha", senha));        
+        List<Usuario> list = super.listarPorParametrosHQL(Usuario.class, "Select u from Usuario u Where u.login = :login and senha = :senha", 0, 0, new Parametro("login", login), new Parametro("senha", senha));
         if (!list.isEmpty()) {
             return list.get(0);
         }
