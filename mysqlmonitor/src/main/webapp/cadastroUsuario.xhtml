@@ -10,7 +10,7 @@
     <ui:define name="titulo">Cadastro Usuário</ui:define>
     <ui:define name="barraNavegacao">Usuário</ui:define>
     <ui:define name="body">        
-        <p:tabView id="tabView" activeIndex="#{usuarioMB.tab}">  
+        <p:tabView id="tabView" dynamic="true" activeIndex="#{usuarioMB.tab}">  
             <p:tab id="tab1" title="Usuários">
                 <h:form>
                     <p:dataTable id="dataTable" styleClass="datatable" var="usuario"  value="#{usuarioMB.usuarios}" widgetVar="usuarioWidget" emptyMessage="Nenhum usuário encontrado">                    
@@ -28,6 +28,7 @@
                         </p:column>                        
                         <p:column style="width:4%">  
                             <p:commandButton id="selectButton" update=":tabView" actionListener="#{usuarioMB.tabCadastro(usuario.idUsuario)}"  icon="ui-icon-search" title="Alterar">                                  
+                                <f:setPropertyActionListener target="#{usuarioMB.usuario}" value="#{usuario}"/>                                
                             </p:commandButton>  
                         </p:column>  
                         <p:column style="width:4%">  
@@ -40,7 +41,7 @@
                 <div id="myTabContent" class="tab-content">
                     <div class="tab-pane active in" id="home">
                         <h:form id="form">
-                            <h:inputHidden value="#{usuarioMB.usuario.idUsuario}" />
+                            <h:inputHidden id="id" value="#{usuarioMB.usuario.idUsuario}"  />
                             <util:texto id="nome" label="Nome" valor="#{usuarioMB.usuario.nome}" required="true" />
                             <util:texto id="email" label="Email" valor="#{usuarioMB.usuario.email}" required="true" />
                             <util:texto id="login" label="Login" valor="#{usuarioMB.usuario.login}" required="true" />
