@@ -24,11 +24,16 @@
     <listener>
         <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
     </listener>
+    <servlet>
+        <servlet-name>ScheduleServlet</servlet-name>
+        <servlet-class>br.com.mysqlmonitor.quartz.ScheduleServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
  
     <resource-env-ref>
         <resource-env-ref-name>BeanManager</resource-env-ref-name>
         <resource-env-ref-type>
             javax.enterprise.inject.spi.BeanManager
-</resource-env-ref-type>
+        </resource-env-ref-type>
     </resource-env-ref>
 </web-app>
