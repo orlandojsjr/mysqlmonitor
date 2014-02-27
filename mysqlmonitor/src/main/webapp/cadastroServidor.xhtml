@@ -52,14 +52,14 @@
                 <div id="myTabContent" class="tab-content">
                     <div class="tab-pane active in" id="home">
                         <h:form id="form">
+                            <h:inputHidden value="#{servidorMB.servidor.idServidor}" />
                             <util:comboBox id="grupoServidor" label="Banco de Dados" listaItens="#{servidorMB.grupoServidores}" valor="#{servidorMB.servidor.grupoServidor.idGrupoServidor}" />
                             <util:texto id="nome" label="Ip" valor="#{servidorMB.servidor.ip}" required="true" />
                             <util:texto id="email" label="Porta" valor="#{servidorMB.servidor.porta}" required="true" />
                             <util:texto id="login" label="Usuario" valor="#{servidorMB.servidor.usuario}" required="true" />
                             <util:senha id="senha" valor="#{servidorMB.servidor.senha}" confirmaSenha="#{usuarioMB.confirmaSenha}" exibirConfirmaSenha="true" required="true" />                            
                             <p:messages id="mensagem"/>                                
-                            <p:commandButton value="Salvar" update=":tabView:form" actionListener="#{servidorMB.salvar()}" rendered="#{servidorMB.servidor.idServidor == null}" styleClass=""/>
-                            <p:commandButton value="Alterar" update=":tabView:form" actionListener="#{servidorMB.alterar()}" rendered="#{servidorMB.servidor.idServidor != null}"  styleClass=""/>
+                            <p:commandButton value="Salvar" update="form" actionListener="#{servidorMB.salvar()}" styleClass=""/>                            
                         </h:form>
                     </div>
                 </div> 
