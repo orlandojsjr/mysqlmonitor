@@ -90,7 +90,7 @@ public class UsuarioMB extends Face implements Serializable {
 
     public void salvar() {
         try {
-            if (usuario.getIdUsuario() == null) {
+            if (usuario.getIdUsuario() == null || usuario.getIdUsuario() == 0) {
                 usuarioDAO.salvar(usuario);                
                 addMensagem("Cadastro realizado.", FacesMessage.SEVERITY_INFO);
             } else {                
@@ -109,8 +109,7 @@ public class UsuarioMB extends Face implements Serializable {
 
     }
 
-    public void tabCadastro(int id) throws Exception {
-        tab = "1";
-        usuario = usuarioDAO.consultar(id);
+    public void tabCadastro() throws Exception {
+        tab = "1";        
     }
 }
