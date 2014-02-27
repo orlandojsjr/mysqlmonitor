@@ -69,12 +69,8 @@ public class ServidorMB extends Face {
     }
 
     public List<Servidor> getServidores() {
-        try {
-            if (servidores == null) {
-                servidores = servidorDAO.findAll();
-            }
-        } catch (Exception ex) {
-            addMensagem("Erro ao carregar Servidores!", FacesMessage.SEVERITY_ERROR);
+        if (servidores == null) {
+            carregarListaServidores();
         }
         return servidores;
     }
@@ -108,40 +104,38 @@ public class ServidorMB extends Face {
         return grupoServidoresItem;
     }
 
+    private void carregarListaServidores() {
+        try {
+            servidores = servidorDAO.findAll();
+        } catch (Exception ex) {
+            addMensagem("Erro ao carregar Servidores!", FacesMessage.SEVERITY_ERROR);
+        }
+    }
+
     public void salvar() {
         try {
             if (!verificarServidorMaster()) {
                 servidor.setTipo("MASTER");
             }
-            servidorDAO.salvar(servidor);
-            addMensagem("Cadrastro realizado com sucesso!", FacesMessage.SEVERITY_INFO);
+            if (servidor.getIdServidor() == null || servidor.getIdServidor() == 0) {
+                servidorDAO.salvar(servidor);
+                addMensagem("Cadrastro realizado com sucesso!", FacesMessage.SEVERITY_INFO);
+            } else {
+                servidorDAO.alterar(servidor);
+                addMensagem("Cadrastro alterado com sucesso!", FacesMessage.SEVERITY_INFO);
+            }
+            carregarListaServidores();
             servidor = new Servidor();
-            tab = "1";
         } catch (Exception ex) {
             Logger.getLogger(ServidorMB.class.getName()).log(Level.SEVERE, null, ex);
             addMensagem("Erro ao cadastrar!", FacesMessage.SEVERITY_ERROR);
         }
     }
 
-    public void alterar() {
-        try {
-            if (!verificarServidorMaster()) {
-                servidor.setTipo("MASTER");
-            }
-            servidorDAO.alterar(servidor);
-            addMensagem("Cadrastro alterado com sucesso!", FacesMessage.SEVERITY_INFO);
-            servidor = new Servidor();
-            tab = "0";
-        } catch (Exception ex) {
-            Logger.getLogger(ServidorMB.class.getName()).log(Level.SEVERE, null, ex);
-            addMensagem("Erro ao cadastrar!", FacesMessage.SEVERITY_ERROR);
-        }
-    }
-    
     public void excluir(Servidor s) {
-        try {                
+        try {
             servidorDAO.excluir(s);
-            servidores = servidorDAO.findAll();            
+            servidores = servidorDAO.findAll();
         } catch (Exception ex) {
             Logger.getLogger(ServidorMB.class.getName()).log(Level.SEVERE, null, ex);
             addMensagem("Erro ao excluir!", FacesMessage.SEVERITY_ERROR);
