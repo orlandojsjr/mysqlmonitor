@@ -18,6 +18,7 @@ import java.util.List;
 public class ServidorDAO extends GenericDAO {
 
     public void salvar(Servidor servidor) throws Exception {
+        servidor.setIdServidor(null);
         super.salvar(servidor);
     }
     
