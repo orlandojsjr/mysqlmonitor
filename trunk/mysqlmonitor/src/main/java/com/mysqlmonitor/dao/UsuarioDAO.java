@@ -19,6 +19,7 @@ import javax.enterprise.context.RequestScoped;
 public class UsuarioDAO extends GenericDAO {
 
     public void salvar(Usuario usuario) throws Exception {
+        usuario.setIdUsuario(null);
         super.salvar(usuario);
     }
 
