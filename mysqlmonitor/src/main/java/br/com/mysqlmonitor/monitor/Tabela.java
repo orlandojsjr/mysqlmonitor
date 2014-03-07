@@ -6,18 +6,15 @@
 
 package br.com.mysqlmonitor.monitor;
 
+import java.util.List;
+
 /**
  *
  * @author orlando
  */
 public class Tabela {
     private String nomeTabela;
-    private String campo;
-    private String tipo;
-    private String permiteNull;
-    private String key;
-    private String valorDefault;
-    private String extra;
+    private List<Campo> campos;
 
     public Tabela(String nomeTabela) {
         this.nomeTabela = nomeTabela;
@@ -31,51 +28,16 @@ public class Tabela {
         this.nomeTabela = nomeTabela;
     }
 
-    public String getCampo() {
-        return campo;
+    public List<Campo> getCampos() {
+        return campos;
     }
 
-    public void setCampo(String campo) {
-        this.campo = campo;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getPermiteNull() {
-        return permiteNull;
-    }
-
-    public void setPermiteNull(String permiteNull) {
-        this.permiteNull = permiteNull;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getValorDefault() {
-        return valorDefault;
-    }
-
-    public void setValorDefault(String valorDefault) {
-        this.valorDefault = valorDefault;
-    }
-
-    public String getExtra() {
-        return extra;
-    }
-
-    public void setExtra(String extra) {
-        this.extra = extra;
+    public void setCampos(List<Campo> campos) {
+        this.campos = campos;
     }    
+
+    @Override
+    public String toString() {
+        return "Tabela{" + "nomeTabela=" + nomeTabela + ", campos=" + campos + '}';
+    }
 }
