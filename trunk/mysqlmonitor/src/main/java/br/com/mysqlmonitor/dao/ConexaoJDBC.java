@@ -25,13 +25,13 @@ public class ConexaoJDBC {
         
     public Connection iniciarConexao(Servidor servidor) {
         try {
-            Class.forName("com.mysql.jsdb.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }        
-        try {
-            connection = DriverManager.getConnection(url, servidor.getUsuario(), servidor.getSenha());
-            url = "jdbc:mysql://" + servidor.getIp() + ":" + servidor.getPorta() + "/" + servidor.getGrupoServidor().getBancoDados() + "";
+        try {            
+            url = "jdbc:mysql://" + servidor.getIp() + ":" + servidor.getPorta() + "/" + servidor.getGrupoServidor().getBancoDados() + "";            
+            connection = DriverManager.getConnection(url, servidor.getUsuario(), servidor.getSenha());            
         } catch (SQLException ex) {
             ex.printStackTrace();            
         }     
