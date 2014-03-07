@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 		http://java.sun.com/xml/ns/javaee/beans_1_0.xsd">
         <interceptors>
-            <class>br.com.mysqlmonitor.Interceptor.InterceptadorGerenciadorDeTransacoes</class>
-            <class>br.com.mysqlmonitor.Interceptor.LoginInterceptor</class>
+            <class>br.com.mysqlmonitor.interceptor.InterceptadorGerenciadorDeTransacoes</class>
+            <class>br.com.mysqlmonitor.interceptor.LoginInterceptor</class>
         </interceptors>
 </beans>
