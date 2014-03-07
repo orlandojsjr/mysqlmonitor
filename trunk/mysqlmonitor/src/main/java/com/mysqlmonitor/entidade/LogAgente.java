@@ -50,6 +50,11 @@ public class LogAgente implements Serializable {
     public LogAgente() {
     }
 
+    public LogAgente(String descricao) {
+        this.descricao = descricao;
+        this.data = new Date();
+    }
+    
     public LogAgente(Integer idLogAgente) {
         this.idLogAgente = idLogAgente;
     }
