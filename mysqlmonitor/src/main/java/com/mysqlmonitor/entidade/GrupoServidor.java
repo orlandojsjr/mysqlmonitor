@@ -135,7 +135,6 @@ public class GrupoServidor implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mysqlmonitor.entidade.GrupoServidor[ idGrupoServidor=" + idGrupoServidor + " ]";
-    }
-
+        return "GrupoServidor{" + "idGrupoServidor=" + idGrupoServidor + '}';
+    }   
 }
