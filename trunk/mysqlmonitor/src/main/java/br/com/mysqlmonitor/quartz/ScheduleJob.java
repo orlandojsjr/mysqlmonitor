@@ -4,6 +4,14 @@
  */
 package br.com.mysqlmonitor.quartz;
 
+import br.com.mysqlmonitor.dao.GrupoServidorDAO;
+import br.com.mysqlmonitor.dao.JPAUtil;
+import br.com.mysqlmonitor.monitor.Monitor;
+import com.mysqlmonitor.entidade.GrupoServidor;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityManager;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -16,6 +24,20 @@ public class ScheduleJob implements Job {
 
     @Override
     public void execute(JobExecutionContext jec) throws JobExecutionException {
+        comparar();
+    }
 
+    private void comparar() {
+        try {            
+            EntityManager em = new JPAUtil().getEntityManager();
+            GrupoServidorDAO grupoServidorDAO = new GrupoServidorDAO(em);
+            List<GrupoServidor> grupoServidores = grupoServidorDAO.findAll();            
+            for (GrupoServidor grupoServidor : grupoServidores) {
+                new Monitor().excutarConferencia(grupoServidor);                
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(ScheduleJob.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
