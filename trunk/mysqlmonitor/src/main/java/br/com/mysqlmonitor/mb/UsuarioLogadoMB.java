@@ -5,7 +5,7 @@
  */
 package br.com.mysqlmonitor.mb;
 
-import com.mysqlmonitor.dao.UsuarioDAO;
+import br.com.mysqlmonitor.dao.UsuarioDAO;
 import com.mysqlmonitor.entidade.Usuario;
 import java.io.Serializable;
 import java.util.logging.Level;
