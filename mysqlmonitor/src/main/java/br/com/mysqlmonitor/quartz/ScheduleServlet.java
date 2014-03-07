@@ -32,9 +32,10 @@ public class ScheduleServlet extends HttpServlet {
             sf = new StdSchedulerFactory();
             sched = sf.getScheduler();
             JobDetail job = JobBuilder.newJob(ScheduleJob.class).withIdentity("job1", "group1").build();
-            CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity("trigger1", "group1").withSchedule(CronScheduleBuilder.cronSchedule("0 0/10 * ? * *")).build();
-            sched.scheduleJob(job, trigger);
-            sched.start();
+            CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity("trigger1", "group1").withSchedule(CronScheduleBuilder.cronSchedule("0 0/1 * ? * *")).build();
+            //CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity("trigger1", "group1").withSchedule(CronScheduleBuilder.cronSchedule("0 0/10 * ? * *")).build();
+            //sched.scheduleJob(job, trigger);
+           // sched.start();
             System.out.println("Schedule Iniciado !");
         } catch (SchedulerException e) {
             System.out.println("Erro ao iniciar Schedule.");
