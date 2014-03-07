@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.mysqlmonitor.entidade;
 
 import java.io.Serializable;
@@ -33,6 +32,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "LogAgente.findByIdLogAgente", query = "SELECT l FROM LogAgente l WHERE l.idLogAgente = :idLogAgente"),
     @NamedQuery(name = "LogAgente.findByData", query = "SELECT l FROM LogAgente l WHERE l.data = :data")})
 public class LogAgente implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,7 +54,7 @@ public class LogAgente implements Serializable {
         this.descricao = descricao;
         this.data = new Date();
     }
-    
+
     public LogAgente(Integer idLogAgente) {
         this.idLogAgente = idLogAgente;
     }
@@ -107,5 +107,5 @@ public class LogAgente implements Serializable {
     public String toString() {
         return "com.mysqlmonitor.entidade.LogAgente[ idLogAgente=" + idLogAgente + " ]";
     }
-    
+
 }
