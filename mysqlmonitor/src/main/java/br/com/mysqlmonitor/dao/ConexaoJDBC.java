@@ -37,6 +37,21 @@ public class ConexaoJDBC {
         }     
         return connection;
     }
+    
+    public Connection iniciarConexaoLocal() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }        
+        try {            
+            url = "jdbc:mysql://127.0.0.1:3306/mysqlmonitor";            
+            connection = DriverManager.getConnection(url, "root", "root");            
+        } catch (SQLException ex) {
+            ex.printStackTrace();            
+        }     
+        return connection;
+    }
 
     public void fecharConexao(){
         try {
