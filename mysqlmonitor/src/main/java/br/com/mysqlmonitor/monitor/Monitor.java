@@ -169,8 +169,7 @@ public class Monitor {
 
     private void enviarEmailDBA() {
         try {
-            for (Usuario usuario : usuarioDAO.findAll()  ) {
-                System.out.println("email>>"+usuario.getEmail());
+            for (Usuario usuario : usuarioDAO.findAll()  ) {                
                 HtmlEmail  email = new HtmlEmail();
                 email.setHostName("smtp.googlemail.com");
                 email.setSmtpPort(465);
