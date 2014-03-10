@@ -5,7 +5,7 @@
  */
 package br.com.mysqlmonitor.dao;
 
-import br.com.mysqlmonitor.interceptor.TransacaoJPA;
+import br.com.mysqlmonitor.interceptador.TransacaoJPA;
 import com.mysqlmonitor.entidade.Usuario;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;

@@ -5,7 +5,7 @@
  */
 package br.com.mysqlmonitor.mb;
 
-import br.com.mysqlmonitor.interceptor.Login;
+import br.com.mysqlmonitor.interceptador.Login;
 import br.com.mysqlmonitor.dao.GrupoServidorDAO;
 import br.com.mysqlmonitor.dao.ServidorDAO;
 import com.mysqlmonitor.entidade.GrupoServidor;

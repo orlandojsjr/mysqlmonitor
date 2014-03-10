@@ -5,7 +5,7 @@
  */
 package br.com.mysqlmonitor.mb;
 
-import br.com.mysqlmonitor.interceptor.Login;
+import br.com.mysqlmonitor.interceptador.Login;
 import br.com.mysqlmonitor.dao.GrupoServidorDAO;
 import com.mysqlmonitor.entidade.GrupoServidor;
 import java.util.List;
