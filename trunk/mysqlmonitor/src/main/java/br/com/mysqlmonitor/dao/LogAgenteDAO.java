@@ -6,7 +6,6 @@
 package br.com.mysqlmonitor.dao;
 
 import com.mysqlmonitor.entidade.LogAgente;
-import javax.persistence.EntityManager;
 
 /**
  *
@@ -14,14 +13,7 @@ import javax.persistence.EntityManager;
  */
 public class LogAgenteDAO extends GenericDAO {
 
-    public LogAgenteDAO() {
-    }
-
-    public LogAgenteDAO(EntityManager em) {
-        super(em);
-    }
-    
-    public void salvar(LogAgente logAgente) throws Exception {
+    public void salvar(LogAgente logAgente) throws Exception {        
         super.salvar(logAgente);
     }
 }
