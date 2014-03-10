@@ -169,8 +169,8 @@ public class Monitor {
 
     private void enviarEmailDBA() {
         try {
-            for (Usuario usuario : usuarioDAO.findAll()  ) {                
-                HtmlEmail  email = new HtmlEmail();
+            for (Usuario usuario : usuarioDAO.findAll()) {
+                HtmlEmail email = new HtmlEmail();
                 email.setHostName("smtp.googlemail.com");
                 email.setSmtpPort(465);
                 email.setAuthenticator(new DefaultAuthenticator("mysqlmonitorsuporte", "4rgvr6RM"));
