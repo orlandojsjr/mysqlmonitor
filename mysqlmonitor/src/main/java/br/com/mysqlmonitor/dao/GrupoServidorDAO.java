@@ -6,7 +6,7 @@
 
 package br.com.mysqlmonitor.dao;
 
-import br.com.mysqlmonitor.interceptor.TransacaoJPA;
+import br.com.mysqlmonitor.interceptador.TransacaoJPA;
 import com.mysqlmonitor.entidade.GrupoServidor;
 import com.mysqlmonitor.entidade.Servidor;
 import java.util.List;

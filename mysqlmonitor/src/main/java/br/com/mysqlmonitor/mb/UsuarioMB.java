@@ -5,7 +5,7 @@
  */
 package br.com.mysqlmonitor.mb;
 
-import br.com.mysqlmonitor.interceptor.Login;
+import br.com.mysqlmonitor.interceptador.Login;
 import br.com.mysqlmonitor.dao.UsuarioDAO;
 import com.mysqlmonitor.entidade.Usuario;
 import java.io.Serializable;
