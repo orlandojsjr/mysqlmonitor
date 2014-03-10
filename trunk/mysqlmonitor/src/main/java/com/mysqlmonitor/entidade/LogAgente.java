@@ -105,7 +105,6 @@ public class LogAgente implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mysqlmonitor.entidade.LogAgente[ idLogAgente=" + idLogAgente + " ]";
+        return "LogAgente{" + "idLogAgente=" + idLogAgente + ", descricao=" + descricao + ", data=" + data + '}';
     }
-
 }
