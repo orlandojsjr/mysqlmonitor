@@ -8,9 +8,10 @@ package br.com.mysqlmonitor.monitor;
 import br.com.mysqlmonitor.dao.ConexaoJDBC;
 import br.com.mysqlmonitor.dao.GrupoServidorDAO;
 import br.com.mysqlmonitor.dao.JPAUtil;
-import br.com.mysqlmonitor.dao.LogAgenteDAO;
+import br.com.mysqlmonitor.dao.UsuarioDAO;
 import com.mysqlmonitor.entidade.GrupoServidor;
 import com.mysqlmonitor.entidade.Servidor;
+import com.mysqlmonitor.entidade.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +20,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.HtmlEmail;
 
 /**
  *
@@ -27,15 +30,19 @@ import javax.persistence.EntityManager;
 public class Monitor {
 
     private final GrupoServidorDAO grupoServidorDAO;
+    private final UsuarioDAO usuarioDAO;
     private final ConexaoJDBC conexaoJDBC = new ConexaoJDBC();
+    private StringBuilder logs;
 
     {
         EntityManager em = new JPAUtil().getEntityManager();
         grupoServidorDAO = new GrupoServidorDAO(em);
+        usuarioDAO = new UsuarioDAO(em);
     }
 
     public void excutarConferencia(GrupoServidor grupoServidor) {
         try {
+            logs = new StringBuilder();
             Servidor servidorMaster = grupoServidorDAO.findMaster(grupoServidor);
             List<Servidor> servidoresSlaves = grupoServidorDAO.findSlave(grupoServidor);
             List<Tabela> tabelasServidorMaster = carregarTabelas(servidorMaster);
@@ -44,6 +51,7 @@ public class Monitor {
                 List<Tabela> tabelasServidorSlave = carregarTabelas(servidorSlave);
                 comparar(tabelasServidorMaster, tabelasServidorSlave);
             }
+            enviarEmailDBA();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -147,12 +155,33 @@ public class Monitor {
 
     private void adicionarLog(String descricao) {
         try {
+            logs.append(descricao + "<br/>");
             Connection con = conexaoJDBC.iniciarConexaoLocal();
             PreparedStatement pst = con.prepareStatement("INSERT INTO log_agente (DESCRICAO, DATA) values (?, now())");
             pst.setString(1, descricao);
             pst.execute();
             pst.close();
             con.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void enviarEmailDBA() {
+        try {
+            for (Usuario usuario : usuarioDAO.findAll()  ) {
+                System.out.println("email>>"+usuario.getEmail());
+                HtmlEmail  email = new HtmlEmail();
+                email.setHostName("smtp.googlemail.com");
+                email.setSmtpPort(465);
+                email.setAuthenticator(new DefaultAuthenticator("mysqlmonitorsuporte", "4rgvr6RM"));
+                email.setSSL(true);
+                email.setFrom("mysqlmonitorsuporte@gmail.com");
+                email.setSubject("Log Mysql Monitor");
+                email.setHtmlMsg(logs.toString());
+                email.addTo(usuario.getEmail());
+                email.send();
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
