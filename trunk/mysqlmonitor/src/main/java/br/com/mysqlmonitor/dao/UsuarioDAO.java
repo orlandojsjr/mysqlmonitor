@@ -9,6 +9,7 @@ import br.com.mysqlmonitor.interceptador.TransacaoJPA;
 import com.mysqlmonitor.entidade.Usuario;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -17,6 +18,13 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 @TransacaoJPA
 public class UsuarioDAO extends GenericDAO {
+
+    public UsuarioDAO() {
+    }
+
+    public UsuarioDAO(EntityManager em) {
+        super(em);
+    }
 
     public void salvar(Usuario usuario) throws Exception {
         usuario.setIdUsuario(null);
