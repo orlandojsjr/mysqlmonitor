@@ -62,6 +62,14 @@ public class ComandoSql implements Serializable {
     public ComandoSql() {
     }
 
+    public ComandoSql(String comando, String status, Usuario usuario, GrupoServidor grupoServidor) {
+        this.comando = comando;
+        this.status = status;        
+        this.usuario = usuario;
+        this.grupoServidor = grupoServidor;
+        this.data = new Date();
+    }
+
     public ComandoSql(Integer idComandoSql) {
         this.idComandoSql = idComandoSql;
     }
