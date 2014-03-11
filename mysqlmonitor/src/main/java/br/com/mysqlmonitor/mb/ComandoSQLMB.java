@@ -5,9 +5,11 @@
  */
 package br.com.mysqlmonitor.mb;
 
+import br.com.mysqlmonitor.dao.ComandoSqlDAO;
 import br.com.mysqlmonitor.dao.GrupoServidorDAO;
 import br.com.mysqlmonitor.dao.ServidorDAO;
 import br.com.mysqlmonitor.interceptador.Login;
+import com.mysqlmonitor.entidade.ComandoSql;
 import com.mysqlmonitor.entidade.GrupoServidor;
 import com.mysqlmonitor.entidade.Servidor;
 import java.util.ArrayList;
@@ -33,6 +35,10 @@ public class ComandoSQLMB extends Face {
     private GrupoServidorDAO grupoServidorDAO;
     @Inject
     private ServidorDAO servidorDAO;
+    @Inject
+    private ComandoSqlDAO comandoSqlDAO;
+    @Inject
+    private UsuarioLogadoMB usuarioLogadoMB;
 
     public String getQuery() {
         return query;
@@ -73,8 +79,10 @@ public class ComandoSQLMB extends Face {
             for (Servidor servidor : servidorDAO.findAll(grupoServidor)) {
                 try {
                     servidorDAO.executarQueryUpdate(servidor, query);
-                    addMensagem("Servidor "+servidor.getTipo()+" " + servidor.getIp() + " atualizado com sucesso!", FacesMessage.SEVERITY_INFO);
+                    comandoSqlDAO.salvar(new ComandoSql(query, "SUCESSO",usuarioLogadoMB.getUsuario(), grupoServidor));
+                    addMensagem("Servidor " + servidor.getTipo() + " " + servidor.getIp() + " atualizado com sucesso!", FacesMessage.SEVERITY_INFO);
                 } catch (Exception ex) {
+                    comandoSqlDAO.salvar(new ComandoSql(query, "ERRO",usuarioLogadoMB.getUsuario(), grupoServidor));
                     addMensagem("Erro ao  atualizar servidor " + servidor.getIp() + "!", FacesMessage.SEVERITY_ERROR);
                     ex.printStackTrace();
                 }
