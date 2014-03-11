@@ -8,6 +8,8 @@ package br.com.mysqlmonitor.dao;
 import br.com.mysqlmonitor.interceptador.TransacaoJPA;
 import com.mysqlmonitor.entidade.GrupoServidor;
 import com.mysqlmonitor.entidade.Servidor;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -33,8 +35,17 @@ public class ServidorDAO extends GenericDAO {
     public List<Servidor> findAll() throws Exception {
         return super.listarPorParametrosHQL(Servidor.class, "Select s from Servidor s order by s.grupoServidor.bancoDados", 0, 0);
     }
+    
+    public List<Servidor> findAll(GrupoServidor grupoServidor) throws Exception {
+        return super.listarPorParametrosHQL(Servidor.class, "Select s from Servidor s Where s.grupoServidor.idGrupoServidor = :idGrupoServidor order by s.grupoServidor.bancoDados", 0, 0, new Parametro("idGrupoServidor", grupoServidor.getIdGrupoServidor()));
+    }
 
     public boolean existeServidorMasterNo(GrupoServidor grupoServidor) throws Exception {
         return !super.listarPorParametrosHQL(Servidor.class, "Select s from Servidor s where s.grupoServidor.idGrupoServidor = :idGrupoServidor and s.tipo = 'MASTER'", 0, 0, new Parametro("idGrupoServidor", grupoServidor.getIdGrupoServidor())).isEmpty();
+    }
+    
+    public boolean executarQueryUpdate(Servidor servidor, String query) throws SQLException{
+        Connection con = new ConexaoJDBC().iniciarConexao(servidor);
+        return con.createStatement().execute(query);
     }
 }
