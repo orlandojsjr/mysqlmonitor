@@ -62,7 +62,7 @@ public class UsuarioLogadoMB extends Face implements Serializable{
         } catch (Exception ex) {
             Logger.getLogger(UsuarioLogadoMB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        addMensagem("Login ou senha inálidos!", FacesMessage.SEVERITY_WARN);
+        addMensagem("Login ou senha inválidos!", FacesMessage.SEVERITY_WARN);
         return "login";
     }
     
