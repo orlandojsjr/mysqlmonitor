@@ -55,18 +55,18 @@ public class ComandoSql implements Serializable {
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
     @ManyToOne(optional = false)
     private Usuario usuario;
-    @JoinColumn(name = "ID_GRUPO_SERVIDOR", referencedColumnName = "ID_GRUPO_SERVIDOR")
+    @JoinColumn(name = "ID_SERVIDOR", referencedColumnName = "ID_SERVIDOR")
     @ManyToOne(optional = false)
-    private GrupoServidor grupoServidor;
+    private Servidor servidor;
 
     public ComandoSql() {
     }
 
-    public ComandoSql(String comando, String status, Usuario usuario, GrupoServidor grupoServidor) {
+    public ComandoSql(String comando, String status, Usuario usuario, Servidor servidor) {
         this.comando = comando;
         this.status = status;        
         this.usuario = usuario;
-        this.grupoServidor = grupoServidor;
+        this.servidor = servidor;
         this.data = new Date();
     }
 
@@ -114,12 +114,12 @@ public class ComandoSql implements Serializable {
         this.usuario = usuario;
     }
 
-    public GrupoServidor getGrupoServidor() {
-        return grupoServidor;
+    public Servidor getServidor() {
+        return servidor;
     }
 
-    public void setGrupoServidor(GrupoServidor grupoServidor) {
-        this.grupoServidor = grupoServidor;
+    public void setServidor(Servidor servidor) {
+        this.servidor = servidor;
     }
 
     @Override
