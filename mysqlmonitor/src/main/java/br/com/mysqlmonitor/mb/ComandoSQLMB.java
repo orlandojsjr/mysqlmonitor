@@ -79,10 +79,10 @@ public class ComandoSQLMB extends Face {
             for (Servidor servidor : servidorDAO.findAll(grupoServidor)) {
                 try {
                     servidorDAO.executarQueryUpdate(servidor, query);
-                    comandoSqlDAO.salvar(new ComandoSql(query, "SUCESSO",usuarioLogadoMB.getUsuario(), grupoServidor));
+                    comandoSqlDAO.salvar(new ComandoSql(query, "SUCESSO",usuarioLogadoMB.getUsuario(), servidor));
                     addMensagem("Servidor " + servidor.getTipo() + " " + servidor.getIp() + " atualizado com sucesso!", FacesMessage.SEVERITY_INFO);
                 } catch (Exception ex) {
-                    comandoSqlDAO.salvar(new ComandoSql(query, "ERRO",usuarioLogadoMB.getUsuario(), grupoServidor));
+                    comandoSqlDAO.salvar(new ComandoSql(query, "ERRO",usuarioLogadoMB.getUsuario(), servidor));
                     addMensagem("Erro ao  atualizar servidor " + servidor.getIp() + "!", FacesMessage.SEVERITY_ERROR);
                     ex.printStackTrace();
                 }
