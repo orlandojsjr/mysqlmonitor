@@ -53,9 +53,7 @@ public class GrupoServidor implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoServidor")
-    private List<Servidor> servidorList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoServidor")
-    private List<ComandoSql> comandoSqlList;
+    private List<Servidor> servidorList;    
 
     public GrupoServidor() {
         dataCadastro = new Date();
@@ -103,14 +101,6 @@ public class GrupoServidor implements Serializable {
 
     public void setServidorList(List<Servidor> servidorList) {
         this.servidorList = servidorList;
-    }
-
-    public List<ComandoSql> getComandoSqlList() {
-        return comandoSqlList;
-    }
-
-    public void setComandoSqlList(List<ComandoSql> comandoSqlList) {
-        this.comandoSqlList = comandoSqlList;
     }
 
     @Override
