@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="template.xhtml">
+        <ui:define name="titulo">Log Agente</ui:define>
+        <ui:define name="barraNavegacao">Log Agente</ui:define>
+        <ui:define name="body">
+            <p:dataTable value="#{logAgenteMB.listaLog}" var="log" paginator="true" rows="10">
+                <f:facet name="header"><h:outputText value="Log"/></f:facet>
+                <p:column headerText="Id">
+                    <h:outputText value="#{log.idLogAgente}"/>
+                </p:column>
+                <p:column headerText="Descrição">
+                    <h:outputText value="#{log.descricao}"/>
+                </p:column>
+                <p:column headerText="Data">
+                    <h:outputText value="#{log.data}">
+                        <f:convertDateTime locale="pt,br" timeStyle="America/Sao_Paulo" dateStyle="long" pattern="dd/MM/yyyy hh:mm"/>
+                    </h:outputText>
+                </p:column>
+            </p:dataTable>
+        </ui:define>
+    </ui:composition>
+</html>
+
