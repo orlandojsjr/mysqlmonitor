@@ -6,6 +6,7 @@
 package br.com.mysqlmonitor.dao;
 
 import com.mysqlmonitor.entidade.LogAgente;
+import java.util.List;
 
 /**
  *
@@ -15,5 +16,9 @@ public class LogAgenteDAO extends GenericDAO {
 
     public void salvar(LogAgente logAgente) throws Exception {        
         super.salvar(logAgente);
+    }
+    
+    public List<LogAgente> findAll() throws Exception {        
+        return super.listarPorParametrosHQL(LogAgente.class, "Select l from LogAgente l order by l.idLogAgente desc",0,0);
     }
 }
