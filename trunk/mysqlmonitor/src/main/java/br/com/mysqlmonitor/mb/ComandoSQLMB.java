@@ -39,6 +39,7 @@ public class ComandoSQLMB extends Face {
     private ComandoSqlDAO comandoSqlDAO;
     @Inject
     private UsuarioLogadoMB usuarioLogadoMB;
+    private List<ComandoSql> comandoSqls;
 
     public String getQuery() {
         return query;
@@ -74,15 +75,30 @@ public class ComandoSQLMB extends Face {
         this.grupoServidoresItem = grupoServidoresItem;
     }
 
+    public List<ComandoSql> getComandoSqls() {
+        try {
+            if (comandoSqls == null) {
+                comandoSqls = comandoSqlDAO.findAll();
+            }
+        } catch (Exception ex) {
+            addMensagem("Erro ao carregar Comandos!", FacesMessage.SEVERITY_ERROR);
+        }
+        return comandoSqls;
+    }
+
+    public void setComandoSqls(List<ComandoSql> comandoSqls) {
+        this.comandoSqls = comandoSqls;
+    }
+
     public void executar() {
         try {
             for (Servidor servidor : servidorDAO.findAll(grupoServidor)) {
                 try {
                     servidorDAO.executarQueryUpdate(servidor, query);
-                    comandoSqlDAO.salvar(new ComandoSql(query, "SUCESSO",usuarioLogadoMB.getUsuario(), servidor));
+                    comandoSqlDAO.salvar(new ComandoSql(query, "SUCESSO", usuarioLogadoMB.getUsuario(), servidor));
                     addMensagem("Servidor " + servidor.getTipo() + " " + servidor.getIp() + " atualizado com sucesso!", FacesMessage.SEVERITY_INFO);
                 } catch (Exception ex) {
-                    comandoSqlDAO.salvar(new ComandoSql(query, "ERRO",usuarioLogadoMB.getUsuario(), servidor));
+                    comandoSqlDAO.salvar(new ComandoSql(query, "ERRO", usuarioLogadoMB.getUsuario(), servidor));
                     addMensagem("Erro ao  atualizar servidor " + servidor.getIp() + "!", FacesMessage.SEVERITY_ERROR);
                     ex.printStackTrace();
                 }
