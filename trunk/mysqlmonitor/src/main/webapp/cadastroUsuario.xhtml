@@ -7,11 +7,11 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:util="http://xmlns.jcp.org/jsf/composite/componentes"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <ui:define name="titulo">Cadastro Usuário</ui:define>
-    <ui:define name="barraNavegacao">Usuário</ui:define>
+    <ui:define name="titulo">Cadastro Analistas</ui:define>
+    <ui:define name="barraNavegacao">Analistas</ui:define>
     <ui:define name="body">        
         <p:tabView id="tabView" dynamic="true" activeIndex="#{usuarioMB.tab}">  
-            <p:tab id="tab1" title="Usuários">
+            <p:tab id="tab1" title="Analistas">
                 <h:form>
                     <p:dataTable id="dataTable" styleClass="datatable" var="usuario"  value="#{usuarioMB.usuarios}" widgetVar="usuarioWidget" emptyMessage="Nenhum usuário encontrado">                    
                         <p:column id="cod" headerText="Cód" width="1%">  
