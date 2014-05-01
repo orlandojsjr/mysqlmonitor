@@ -46,12 +46,13 @@ public class Monitor {
             Servidor servidorMaster = grupoServidorDAO.findMaster(grupoServidor);
             List<Servidor> servidoresSlaves = grupoServidorDAO.findSlave(grupoServidor);
             List<Tabela> tabelasServidorMaster = carregarTabelas(servidorMaster);
-
+            System.out.println("Iniciando verificao...");
             for (Servidor servidorSlave : servidoresSlaves) {
                 List<Tabela> tabelasServidorSlave = carregarTabelas(servidorSlave);
                 comparar(tabelasServidorMaster, tabelasServidorSlave);
             }
             enviarEmailDBA();
+            System.out.println("Fim verificacao...");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -135,7 +136,7 @@ public class Monitor {
                     adicionarLog("Tabela (" + master.getNomeTabela() + ") com CAMPO diferente: Master(" + campoMaster.getNome() + "), Slave(" + campoSlave.getNome() + ")");
                 }
                 if (!campoMaster.getTipo().equals(campoSlave.getTipo())) {
-                    adicionarLog("Tabela (" + master.getNomeTabela() + ") com TIPO diferente: Master(" + campoMaster.getTipo() + "), Slave(" + campoSlave.getTipo() + ")");
+                    adicionarLog("Tabela (" + master.getNomeTabela() + ") com TIPO/TAMANHO diferente: Master(" + campoMaster.getTipo() + "), Slave(" + campoSlave.getTipo() + ")");
                 }
                 if (!campoMaster.getPermiteNull().equals(campoSlave.getPermiteNull())) {
                     adicionarLog("Tabela (" + master.getNomeTabela() + ") com PERMITENULL diferente: Master(" + campoMaster.getPermiteNull() + "), Slave(" + campoSlave.getPermiteNull() + ")");
@@ -169,17 +170,21 @@ public class Monitor {
 
     private void enviarEmailDBA() {
         try {
-            for (Usuario usuario : usuarioDAO.findAll()) {
-                HtmlEmail email = new HtmlEmail();
-                email.setHostName("smtp.googlemail.com");
-                email.setSmtpPort(465);
-                email.setAuthenticator(new DefaultAuthenticator("mysqlmonitorsuporte", "4rgvr6RM"));
-                email.setSSL(true);
-                email.setFrom("mysqlmonitorsuporte@gmail.com");
-                email.setSubject("Log Mysql Monitor");
-                email.setHtmlMsg(logs.toString());
-                email.addTo(usuario.getEmail());
-                email.send();
+            if (logs.length() != 0) {
+                System.out.println("Divergencias: "+logs);
+                for (Usuario usuario : usuarioDAO.findAll()) {
+                    System.out.println("Enviando email para: "+usuario.getNome());
+                    HtmlEmail email = new HtmlEmail();                    
+                    email.setHostName("smtp.googlemail.com");
+                    email.setSmtpPort(465);
+                    email.setAuthenticator(new DefaultAuthenticator("mysqlmonitorsuporte", "4rgvr6RM"));
+                    email.setSSL(true);
+                    email.setFrom("mysqlmonitorsuporte@gmail.com");
+                    email.setSubject("Log Mysql Monitor");                    
+                    email.setHtmlMsg(logs.toString());
+                    email.addTo(usuario.getEmail());
+                    email.send();
+                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();
