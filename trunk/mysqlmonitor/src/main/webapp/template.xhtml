@@ -64,11 +64,8 @@
                             <i class="icon-caret-down"></i>
                         </a>
 
-                        <ul class="dropdown-menu">
-                            <li><a tabindex="-1" href="#">Minha Conta</a></li>
-                            <li class="divider"></li>
-                            <li><a tabindex="-1" class="visible-phone" href="#">Configurações</a></li>
-                            <li class="divider visible-phone"></li>                            
+                        <ul class="dropdown-menu">                            
+                            <li class="divider"></li>                                                        
                             <h:form>
                                 <li><h:commandLink action="#{usuarioLogadoMB.logOut()}" tabindex="-1" >Logout</h:commandLink></li>
                             </h:form>
@@ -81,7 +78,7 @@
         </div>
         <div class="sidebar-nav">            
 
-            <a href="#dashboard-menu" class="nav-header" data-toggle="collapse"><i class="icon-dashboard"></i>Dashboard<span class="label label-info">+3</span></a>
+            <a href="#dashboard-menu" class="nav-header" data-toggle="collapse"><i class="icon-dashboard"></i>Dashboard</a>
             <ul id="dashboard-menu" class="nav nav-list collapse in">
                 <li><a href="index.jsf">Home</a></li>
                 <li><a href="comandoSQL.jsf">Comandos SQL</a></li>
