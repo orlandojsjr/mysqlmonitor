@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>MySQL Monitor</title>
         <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css"/>
@@ -38,8 +39,8 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png"/>
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png"/>
         <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png"/>
-        
-        
+
+
         <link rel="stylesheet" href="lib/codemirror.css" />
         <script src="lib/codemirror.js"></script>
         <script src="lib/sql.js"></script>
@@ -49,7 +50,7 @@
                 border-bottom: 1px solid black;
             }
         </style>
-        
+
     </h:head>
     <h:body>
         <div class="navbar">
@@ -69,7 +70,7 @@
                             <li><a tabindex="-1" class="visible-phone" href="#">Configurações</a></li>
                             <li class="divider visible-phone"></li>                            
                             <h:form>
-                            <li><h:commandLink action="#{usuarioLogadoMB.logOut()}" tabindex="-1" >Logout</h:commandLink></li>
+                                <li><h:commandLink action="#{usuarioLogadoMB.logOut()}" tabindex="-1" >Logout</h:commandLink></li>
                             </h:form>
                         </ul>
                     </li>
@@ -87,15 +88,17 @@
                 <li><a href="historicoSQL.jsf">Histórico SQL</a></li>
                 <li><a href="logAgente.jsf">Log Agente</a></li>                
             </ul>
-            <a href="#accounts-menu" class="nav-header" data-toggle="collapse"><i class="icon-briefcase"></i>Cadastros</a>
-            <ul id="accounts-menu" class="nav nav-list collapse in">                
-                <li><a href="cadastroUsuario.jsf">Analistas</a></li>
-                <li><a href="cadastroServidor.jsf">Servidores</a></li>
-                <li><a href="cadastroGrupoServidor.jsf">Grupo Servidores</a></li>                
-            </ul>            
+            <c:if test="#{usuarioLogadoMB.isAdmin()}">
+                <a href="#accounts-menu" class="nav-header" data-toggle="collapse"><i class="icon-briefcase"></i>Cadastros</a>
+                <ul id="accounts-menu" class="nav nav-list collapse in">                
+                    <li><a href="cadastroUsuario.jsf">Analistas</a></li>
+                    <li><a href="cadastroServidor.jsf">Servidores</a></li>
+                    <li><a href="cadastroGrupoServidor.jsf">Grupo Servidores</a></li>                
+                </ul>     
+            </c:if>
             <a href="faq.html" class="nav-header" ><i class="icon-comment"></i>Sobre</a>
             <h:form>
-            <h:commandLink action="#{usuarioLogadoMB.logOut()}"  class="nav-header"><i class="icon-question-sign"></i>Logout</h:commandLink>            
+                <h:commandLink action="#{usuarioLogadoMB.logOut()}"  class="nav-header"><i class="icon-question-sign"></i>Logout</h:commandLink>            
             </h:form>   
         </div>
         <div class="content">
