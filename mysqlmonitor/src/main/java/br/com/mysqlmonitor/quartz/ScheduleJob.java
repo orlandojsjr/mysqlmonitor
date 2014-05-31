@@ -6,7 +6,6 @@ package br.com.mysqlmonitor.quartz;
 
 import br.com.mysqlmonitor.dao.GrupoServidorDAO;
 import br.com.mysqlmonitor.dao.JPAUtil;
-import br.com.mysqlmonitor.mb.IndexMB;
 import br.com.mysqlmonitor.monitor.Monitor;
 import com.mysqlmonitor.entidade.GrupoServidor;
 import java.util.List;
@@ -24,7 +23,7 @@ import org.quartz.JobExecutionException;
 public class ScheduleJob implements Job {
 
     private static Boolean rodarAgente = false;
-    
+
     @Override
     public void execute(JobExecutionContext jec) throws JobExecutionException {
         if (rodarAgente) {
@@ -49,7 +48,7 @@ public class ScheduleJob implements Job {
     public static Boolean isRodarAgente() {
         return rodarAgente;
     }
-    
+
     public static void setRodarAgente(Boolean rodarAgente) {
         ScheduleJob.rodarAgente = rodarAgente;
     }
