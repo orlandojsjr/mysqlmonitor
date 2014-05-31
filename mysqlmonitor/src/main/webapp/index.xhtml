@@ -6,10 +6,17 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:util="http://java.sun.com/jsf/composite/componentes">
+    <ui:define name="titulo">Agente verificador de catálogos</ui:define>
+    <ui:define name="barraNavegacao">Status Agente</ui:define>
     <ui:define name="body">
-        <h:form>                        
+        <h:form id="form">
+            <div class="alert #{!indexMB.liberarBotao()?' alert-error':' alert-success'}">
+                <h:outputText rendered="#{indexMB.liberarBotao()}" value="Status: Agente está rodando!"/>
+                <h:outputText rendered="#{!indexMB.liberarBotao()}" value="Status: Agente está parado!"/>
+            </div>            
+            <p:commandButton value="Iniciar"  update="form" disabled="#{indexMB.liberarBotao()}" actionListener="#{indexMB.iniciarAgenteVerificadorCatalogos()}" />
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;" escape="true"/>
+            <p:commandButton value="Parar"  update="form"  disabled="#{!indexMB.liberarBotao()}" actionListener="#{indexMB.pararAgenteVerificadorCatalogos()}" />
         </h:form>
     </ui:define>
 </ui:composition>
-
-
