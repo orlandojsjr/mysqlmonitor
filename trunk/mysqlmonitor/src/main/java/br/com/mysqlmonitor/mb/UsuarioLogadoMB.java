@@ -21,7 +21,7 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class UsuarioLogadoMB extends Face implements Serializable{
+public class UsuarioLogadoMB extends Face implements Serializable {
 
     @Inject
     private UsuarioDAO usuarioDAO;
@@ -53,10 +53,14 @@ public class UsuarioLogadoMB extends Face implements Serializable{
         return usuario != null;
     }
 
+    public Boolean isAdmin() {
+        return usuario != null && usuario.getTipo().equals("ADMIN");
+    }
+
     public String logar() {
         try {
             usuario = usuarioDAO.logar(login, senha);
-            if(isLogado()){                
+            if (isLogado()) {
                 return "index";
             }
         } catch (Exception ex) {
@@ -65,8 +69,8 @@ public class UsuarioLogadoMB extends Face implements Serializable{
         addMensagem("Login ou senha inválidos!", FacesMessage.SEVERITY_WARN);
         return "login";
     }
-    
-    public String logOut(){
+
+    public String logOut() {
         usuario = null;
         return "login";
     }
