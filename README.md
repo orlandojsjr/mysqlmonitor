@@ -1,4 +1,4 @@
 MySQLMonitor
 ============
 
-Trabalho de conclusão da Pós Graduação Tecnologias da Informação e Comunicação PUC - Poços de Caldas.
+Trabalho de conclusão do curso de Pós Graduação em Tecnologias da Informação e Comunicação na PUC - Poços de Caldas.
